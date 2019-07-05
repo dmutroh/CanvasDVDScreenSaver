@@ -8,8 +8,8 @@ var height= 200;
 var width= 200;
 var x= Math.random()*(window.innerWidth-width);
 var y= Math.random()*(window.innerHeight-height);
-var incx= 1;
-var incy= 1;
+var incx= 2;
+var incy= 2;
 if(Math.random()>0.5){incx=-incx;}
 if(Math.random()>0.5){incy=-incy;}
 
@@ -21,6 +21,8 @@ var color= "#"+((1<<24)*Math.random()|0).toString(16);
 
 function animate()
 {
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
     
     requestAnimationFrame(animate);
      
@@ -35,6 +37,14 @@ function animate()
     c.drawImage(image, x, y,height,width);
     c.stroke;
     
+    if(x+width-Math.abs(incx)>window.innerWidth||x+Math.abs(incx)<0||y+height-Math.abs(incx)>window.innerHeight||y+Math.abs(incx)<0)
+    {
+        x= Math.random()*(window.innerWidth-width);
+        y= Math.random()*(window.innerHeight-height);
+        if(Math.random()>0.5){incx=-incx;}
+        if(Math.random()>0.5){incy=-incy;}
+    }
+    
     if(x+width>window.innerWidth||x<0)
     {
         incx=-incx;
@@ -47,6 +57,8 @@ function animate()
         color= "#"+((1<<24)*Math.random()|0).toString(16);
     }
     
+    
+
 
 }
 c.fillStyle= "#"+((1<<24)*Math.random()|0).toString(16);
